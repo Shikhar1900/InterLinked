@@ -1,3 +1,10 @@
+npm create vite@latest interlinked --template react
+cd interlinked
+npm install
+
+
+
+
 import React, { useState } from "react";
 import "./App.css";
 
