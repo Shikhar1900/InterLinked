@@ -1,48 +1,72 @@
 import React, { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import "./App.css";
 
-export default function InterLinked() {
+function InterLinked() {
   const [query, setQuery] = useState("");
   const [summary, setSummary] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSummarize = async () => {
     setLoading(true);
-    // Mock summary until integrated with actual backend/API
     setTimeout(() => {
       setSummary(
-        `🔍 **Top Insights**\n- Most PM interviews focus on product sense and structured thinking.\n- The STAR method is frequently mentioned in behavioral rounds.\n\n📚 **Mentioned Resources**\n- Cracking the PM Interview\n- Decode and Conquer by Lewis Lin\n\n🔥 **Trends**\n- Candidates increasingly share Miro/Notion frameworks.\n- Mock interviews on LinkedIn Live are gaining traction.`
+        `🔍 Top Insights\n- PM interviews focus on structured thinking.\n- STAR method is key for behavioral rounds.\n\n📚 Resources\n- Cracking the PM Interview\n- Decode and Conquer\n\n🔥 Trends\n- More LinkedIn Live mock interviews.\n- Candidates share Miro/Notion frameworks.`
       );
       setLoading(false);
-    }, 2000);
+    }, 1500);
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-4">
-      <h1 className="text-3xl font-bold text-center">🔗 InterLinked</h1>
-      <p className="text-center text-gray-500">
-        Enter any interview prep topic and get smart summaries from public LinkedIn wisdom.
+    <div style={{ maxWidth: "700px", margin: "auto", padding: "2rem" }}>
+      <h1 style={{ fontSize: "2rem", textAlign: "center" }}>🔗 InterLinked</h1>
+      <p style={{ textAlign: "center", color: "gray" }}>
+        Enter a topic and get smart summaries from LinkedIn content.
       </p>
-      <Textarea
-        placeholder="e.g. Product Management interview tips"
+      <textarea
+        placeholder="e.g. Product Management interview"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="min-h-[120px]"
+        rows={6}
+        style={{
+          width: "100%",
+          padding: "1rem",
+          fontSize: "1rem",
+          marginTop: "1rem",
+          borderRadius: "8px",
+          border: "1px solid #ccc",
+        }}
       />
-      <div className="text-center">
-        <Button onClick={handleSummarize} disabled={loading}>
+      <div style={{ textAlign: "center", marginTop: "1rem" }}>
+        <button
+          onClick={handleSummarize}
+          disabled={loading}
+          style={{
+            padding: "0.6rem 1.2rem",
+            fontSize: "1rem",
+            borderRadius: "8px",
+            backgroundColor: "#333",
+            color: "#fff",
+            cursor: "pointer",
+          }}
+        >
           {loading ? "Summarizing..." : "Get Insights"}
-        </Button>
+        </button>
       </div>
       {summary && (
-        <Card>
-          <CardContent className="whitespace-pre-line p-4">
-            {summary}
-          </CardContent>
-        </Card>
+        <pre
+          style={{
+            background: "#f4f4f4",
+            padding: "1rem",
+            marginTop: "2rem",
+            borderRadius: "8px",
+            whiteSpace: "pre-line",
+          }}
+        >
+          {summary}
+        </pre>
       )}
     </div>
   );
 }
+
+export default InterLinked;
