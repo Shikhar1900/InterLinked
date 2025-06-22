@@ -1,0 +1,48 @@
+import React, { useState } from "react";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+
+export default function InterLinked() {
+  const [query, setQuery] = useState("");
+  const [summary, setSummary] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSummarize = async () => {
+    setLoading(true);
+    // Mock summary until integrated with actual backend/API
+    setTimeout(() => {
+      setSummary(
+        `🔍 **Top Insights**\n- Most PM interviews focus on product sense and structured thinking.\n- The STAR method is frequently mentioned in behavioral rounds.\n\n📚 **Mentioned Resources**\n- Cracking the PM Interview\n- Decode and Conquer by Lewis Lin\n\n🔥 **Trends**\n- Candidates increasingly share Miro/Notion frameworks.\n- Mock interviews on LinkedIn Live are gaining traction.`
+      );
+      setLoading(false);
+    }, 2000);
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto p-6 space-y-4">
+      <h1 className="text-3xl font-bold text-center">🔗 InterLinked</h1>
+      <p className="text-center text-gray-500">
+        Enter any interview prep topic and get smart summaries from public LinkedIn wisdom.
+      </p>
+      <Textarea
+        placeholder="e.g. Product Management interview tips"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        className="min-h-[120px]"
+      />
+      <div className="text-center">
+        <Button onClick={handleSummarize} disabled={loading}>
+          {loading ? "Summarizing..." : "Get Insights"}
+        </Button>
+      </div>
+      {summary && (
+        <Card>
+          <CardContent className="whitespace-pre-line p-4">
+            {summary}
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+}
